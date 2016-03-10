@@ -16,9 +16,9 @@ page.onError = function(msg, trace) {
   trace.forEach(function(item) {
     return console.error('    ' + item.file + ': ' + item.line);
   });
-  // XXX Need to decide if we should exit here. Sometimes there are
-  // client errors but the tests still load and run fine.
-  //return phantom.exit(6);
+  // We could call phantom.exit here, but sometimes there are benign client errors
+  // and the tests still load and run fine. So instead there is a safeguard in the
+  // setInterval to exit if nothing happens for awhile.
 };
 
 page.open(system.env.ROOT_URL);

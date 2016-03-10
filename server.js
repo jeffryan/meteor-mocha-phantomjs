@@ -81,36 +81,35 @@ function startPhantom() {
     }
   });
 
-  phantomProcess.on('error', function (error) {
+  phantomProcess.on('error', (error) => {
     throw error;
   });
 
-  phantomProcess.on('exit', function (code) {
+  phantomProcess.on('exit', (code) => {
     exitIfDone('client', code);
   });
 
-  phantomProcess.stdout.on('data', function(data) {
+  // The PhantomJS script echoes whatever the page prints to the browser console and
+  // here we echo that once again to the server console.
+  phantomProcess.stdout.on('data', (data) => {
     clientLogBuffer(data.toString());
   });
-
-  phantomProcess.stderr.on('data', function(data) {
+  phantomProcess.stderr.on('data', (data) => {
     clientLogBuffer(data.toString());
   });
 }
 
 // Prior to "startup", app tests will be parsed and loaded by Mocha
 Meteor.startup(() => {
-  Meteor.defer(() => {
-    // Run the server tests
-    printHeader('SERVER');
+  // Run the server tests
+  printHeader('SERVER');
 
-    mainMocha.run((failures) => {
-      exitIfDone('server', failures);
-    });
-
-    // Simultaneously start phantom to run the client tests
-    // XXX It would be nice to be able to detect whether there are any client
-    // tests and skip the whole phantomjs thing if we can.
-    startPhantom();
+  mainMocha.run((failures) => {
+    exitIfDone('server', failures);
   });
+
+  // Simultaneously start phantom to run the client tests
+  // XXX It would be nice to be able to detect whether there are any client
+  // tests and skip the whole phantomjs thing if we can.
+  startPhantom();
 });

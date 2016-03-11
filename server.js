@@ -1,7 +1,4 @@
-import path from 'path';
-import fs from 'fs';
-import childProcess from 'child_process';
-import phantomjs from 'phantomjs-prebuilt';
+import { startPhantom } from 'meteor/dispatch:phantomjs-tests';
 
 // We let the package user install whatever mocha version they want
 // on the server. This will throw an error if they haven't done so.
@@ -9,8 +6,6 @@ import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 checkNpmVersions({
   'mocha': '2.x.x'
 });
-
-const PHANTOMJS_SCRIPT_FILE_NAME = 'phantomjsScript.js';
 
 // We can't use `import` here because it will be hoisted to before the `checkNpmVersions` call
 const Mocha = require('mocha');
@@ -72,44 +67,27 @@ function exitIfDone(type, failures) {
   }
 }
 
-function startPhantom() {
-  var scriptPath = Assets.absoluteFilePath(PHANTOMJS_SCRIPT_FILE_NAME);
-
-  var phantomProcess = childProcess.execFile(phantomjs.path, [scriptPath], {
-    env: {
-      ROOT_URL: process.env.ROOT_URL,
-    }
-  });
-
-  phantomProcess.on('error', (error) => {
-    throw error;
-  });
-
-  phantomProcess.on('exit', (code) => {
-    exitIfDone('client', code);
-  });
-
-  // The PhantomJS script echoes whatever the page prints to the browser console and
-  // here we echo that once again to the server console.
-  phantomProcess.stdout.on('data', (data) => {
-    clientLogBuffer(data.toString());
-  });
-  phantomProcess.stderr.on('data', (data) => {
-    clientLogBuffer(data.toString());
-  });
-}
-
 // Prior to "startup", app tests will be parsed and loaded by Mocha
 Meteor.startup(() => {
   // Run the server tests
   printHeader('SERVER');
 
-  mainMocha.run((failures) => {
-    exitIfDone('server', failures);
+  mainMocha.run((failureCount) => {
+    exitIfDone('server', failureCount);
   });
 
   // Simultaneously start phantom to run the client tests
   // XXX It would be nice to be able to detect whether there are any client
   // tests and skip the whole phantomjs thing if we can.
-  startPhantom();
+  startPhantom({
+    stdout(data) {
+      clientLogBuffer(data.toString());
+    },
+    stderr(data) {
+      clientLogBuffer(data.toString());
+    },
+    done(failureCount) {
+      exitIfDone('client', failureCount);
+    },
+  });
 });

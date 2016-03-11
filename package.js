@@ -6,10 +6,6 @@ Package.describe({
   testOnly: true,
 });
 
-Npm.depends({
-  'phantomjs-prebuilt': '2.1.4',
-});
-
 Package.onUse(function (api) {
   api.versionsFrom('1.2.1');
 
@@ -19,8 +15,6 @@ Package.onUse(function (api) {
     'tmeasday:check-npm-versions@0.1.1',
     'practicalmeteor:mocha-core@0.1.4'
   ], 'server');
-
-  api.addAssets('phantomjsScript.js', 'server');
 
   api.mainModule('client.js', 'client');
   api.mainModule('server.js', 'server');

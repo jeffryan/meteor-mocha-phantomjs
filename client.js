@@ -23,11 +23,11 @@ mocha.setup({
 function runTests() {
   // These `window` properties are all used by the phantomjs script to
   // know what is happening.
-  window.mochaIsRunning = true;
+  window.testsAreRunning = true;
   mocha.run((failures) => {
-    window.mochaIsRunning = false;
-    window.mochaTestFailures = failures;
-    window.mochaTestsDone = true;
+    window.testsAreRunning = false;
+    window.testFailures = failures;
+    window.testsDone = true;
   });
 }
 

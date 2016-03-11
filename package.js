@@ -13,7 +13,8 @@ Package.onUse(function (api) {
 
   api.use([
     'tmeasday:check-npm-versions@0.1.1',
-    'practicalmeteor:mocha-core@0.1.4'
+    'practicalmeteor:mocha-core@0.1.4',
+    'dispatch:phantomjs-tests@0.0.1',
   ], 'server');
 
   api.mainModule('client.js', 'client');

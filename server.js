@@ -67,8 +67,8 @@ function exitIfDone(type, failures) {
   }
 }
 
-// Prior to "startup", app tests will be parsed and loaded by Mocha
-Meteor.startup(() => {
+// Before Meteor calls the `start` function, app tests will be parsed and loaded by Mocha
+function start() {
   // Run the server tests
   printHeader('SERVER');
 
@@ -90,4 +90,6 @@ Meteor.startup(() => {
       exitIfDone('client', failureCount);
     },
   });
-});
+}
+
+export { start };

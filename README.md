@@ -15,21 +15,6 @@ meteor add dispatch:mocha-phantomjs
 
 Note that you need to install the `mocha` npm package yourself. This Meteor package does not include it automatically, so you can use pretty much any version of Mocha you want (v2+) as long as its API is compatible with how this package works.
 
-### Installation Note
-
-Currently to make everything work you need to copy the `dispatch:phantomjs-tests` package into your app's `/packages` directory. Using [mgp](https://github.com/DispatchMe/mgp/), add
-
-```
-"dispatch:phantomjs-tests": {
-  "git": "git@github.com:DispatchMe/meteor-phantomjs-tests.git",
-  "version": "f613cf3a1fae0c48a56012c06a160f909c570eae"
-}
-```
-
-to your `git-packages.json` file and enter `mgp dispatch:phantomjs-tests`.
-
-For more information, see https://github.com/meteor/meteor/issues/6496
-
 ## Run app tests
 
 ```bash

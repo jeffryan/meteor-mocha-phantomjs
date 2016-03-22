@@ -9,7 +9,7 @@ This package runs your client tests within a PhantomJS page. If you prefer a dif
 In a Meteor 1.3+ app directory:
 
 ```bash
-npm i --save-dev mocha
+npm i --save-dev mocha phantomjs-prebuilt
 meteor add dispatch:mocha-phantomjs
 ```
 

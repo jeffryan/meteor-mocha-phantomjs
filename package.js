@@ -2,8 +2,12 @@ Package.describe({
   name: "dispatch:mocha-phantomjs",
   summary: "Run package or app tests with Mocha+PhantomJS and report all results in the server console",
   git: "https://github.com/dispatch/meteor-mocha-phantomjs.git",
-  version: '0.0.2',
+  version: '0.0.3',
   testOnly: true,
+});
+
+Npm.depends({
+  mocha: '2.4.5',
 });
 
 Package.onUse(function (api) {
@@ -12,7 +16,6 @@ Package.onUse(function (api) {
   api.use('ecmascript');
 
   api.use([
-    'tmeasday:check-npm-versions@0.1.1',
     'practicalmeteor:mocha-core@0.1.4',
     'dispatch:phantomjs-tests@0.0.3',
   ], 'server');

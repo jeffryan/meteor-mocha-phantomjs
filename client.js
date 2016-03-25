@@ -1,6 +1,4 @@
-// It is safe to import from mocha here because we've already verified that
-// it is installed in server.js. We need to import the "mocha.js" file specifically,
-// though, because that is the browser entry point.
+// We need to import the "mocha.js" file specifically because that is the browser entry point.
 import 'mocha/mocha.js';
 
 import browserConsoleReporter from './browserConsoleReporter';

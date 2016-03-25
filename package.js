@@ -2,7 +2,7 @@ Package.describe({
   name: "dispatch:mocha-phantomjs",
   summary: "Run package or app tests with Mocha+PhantomJS and report all results in the server console",
   git: "https://github.com/dispatch/meteor-mocha-phantomjs.git",
-  version: '0.0.3',
+  version: '0.0.4',
   testOnly: true,
 });
 
@@ -17,7 +17,7 @@ Package.onUse(function (api) {
 
   api.use([
     'practicalmeteor:mocha-core@0.1.4',
-    'dispatch:phantomjs-tests@0.0.3',
+    'dispatch:phantomjs-tests@0.0.4',
   ], 'server');
 
   api.mainModule('client.js', 'client');

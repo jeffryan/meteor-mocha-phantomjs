@@ -12,10 +12,16 @@ In a Meteor 1.3+ app directory:
 meteor add dispatch:mocha-phantomjs
 ```
 
-## Run app tests
+## Run app unit tests
 
 ```bash
 meteor test --once --driver-package dispatch:mocha-phantomjs
+```
+
+## Run app unit tests in watch mode
+
+```bash
+TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs
 ```
 
 ### Run with a different server reporter
@@ -35,3 +41,17 @@ CLIENT_TEST_REPORTER="my-browser-console-reporter" meteor test --once --driver-p
 ```
 
 When creating your custom console reporter, you can use the `browserConsoleReporter.js` file in this repo as your starting point.
+
+## NPM Scripts
+
+A good best practice is to define these commands as run scripts in your app's `package.json` file. For example:
+
+```json
+"scripts": {
+  "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+  "test:watch": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
+  "start": "meteor run"
+}
+```
+
+And then run `npm test` for one-time/CI mode or `npm run test:watch` to rerun the tests whenever you change a file.

@@ -50,10 +50,12 @@ function exitIfDone(type, failures) {
     console.log(`SERVER FAILURES: ${serverFailures}`);
     console.log(`CLIENT FAILURES: ${clientFailures}`);
     console.log('--------------------------------');
-    if (clientFailures + serverFailures > 0) {
-      process.exit(2); // exit with non-zero status if there were failures
-    } else {
-      process.exit(0);
+    if (!process.env.TEST_WATCH) {
+      if (clientFailures + serverFailures > 0) {
+        process.exit(2); // exit with non-zero status if there were failures
+      } else {
+        process.exit(0);
+      }
     }
   }
 }
@@ -68,8 +70,6 @@ function start() {
   });
 
   // Simultaneously start phantom to run the client tests
-  // XXX It would be nice to be able to detect whether there are any client
-  // tests and skip the whole phantomjs thing if we can.
   startPhantom({
     stdout(data) {
       clientLogBuffer(data.toString());

@@ -1,11 +1,4 @@
-// We need to import the "mocha.js" file specifically because that is the browser entry point.
-import 'mocha/mocha.js';
 import browserConsoleReporter from './browserConsoleReporter';
-
-// This defines "describe", "it", etc.
-mocha.setup({
-  ui: 'bdd',
-});
 
 // Run the client tests. Meteor calls the `runTests` function exported by
 // the driver package on the client.

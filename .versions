@@ -2,7 +2,8 @@ babel-compiler@6.6.1
 babel-runtime@0.1.7
 base64@1.0.7
 check@1.1.3
-dispatch:mocha-phantomjs@0.0.7
+dispatch:mocha-core@0.0.1
+dispatch:mocha-phantomjs@0.0.8
 dispatch:phantomjs-tests@0.0.4
 ecmascript@0.4.2
 ecmascript-runtime@0.2.9

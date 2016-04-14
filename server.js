@@ -1,14 +1,7 @@
-import Mocha from 'mocha';
+import { mochaInstance } from 'meteor/dispatch:mocha-core';
 import { startPhantom } from 'meteor/dispatch:phantomjs-tests';
 
 const reporter = process.env.SERVER_TEST_REPORTER || 'spec';
-
-// Initialize a new `Mocha` test runner instance
-const mainMocha = new Mocha();
-
-// Use practicalmeteor:mocha-core to bind the Meteor environment and support
-// synchronous server code.
-Package['practicalmeteor:mocha-core'].setupGlobals(mainMocha);
 
 // Since intermingling client and server log lines would be confusing,
 // the idea here is to buffer all client logs until server tests have
@@ -70,9 +63,9 @@ function start() {
   // We need to set the reporter when the tests actually run to ensure no conflicts with
   // other test driver packages that may be added to the app but are not actually being
   // used on this run.
-  mainMocha.reporter(reporter);
+  mochaInstance.reporter(reporter);
 
-  mainMocha.run((failureCount) => {
+  mochaInstance.run((failureCount) => {
     exitIfDone('server', failureCount);
   });
 

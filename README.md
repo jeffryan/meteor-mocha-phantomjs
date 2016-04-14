@@ -32,16 +32,6 @@ The default Mocha reporter for server tests is the "spec" reporter. You can set 
 SERVER_TEST_REPORTER="dot" meteor test --once --driver-package dispatch:mocha-phantomjs
 ```
 
-### Run with a different client reporter
-
-This package includes a browser console reporter. You can set the `CLIENT_TEST_REPORTER` environment variable to the name of a different Node module to provide your own browser console reporter. You might want to do this if you don't like the indentation, spacing, formatting, etc. of the built-in reporter.
-
-```bash
-CLIENT_TEST_REPORTER="my-browser-console-reporter" meteor test --once --driver-package dispatch:mocha-phantomjs
-```
-
-When creating your custom console reporter, you can use the `browserConsoleReporter.js` file in this repo as your starting point.
-
 ## NPM Scripts
 
 A good best practice is to define these commands as run scripts in your app's `package.json` file. For example:

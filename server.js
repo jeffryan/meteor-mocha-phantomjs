@@ -1,6 +1,8 @@
 import Mocha from 'mocha';
 import { startPhantom } from 'meteor/dispatch:phantomjs-tests';
 
+const reporter = process.env.SERVER_TEST_REPORTER || 'spec';
+
 // Initialize a new `Mocha` test runner instance
 const mainMocha = new Mocha();
 
@@ -64,6 +66,11 @@ function exitIfDone(type, failures) {
 function start() {
   // Run the server tests
   printHeader('SERVER');
+
+  // We need to set the reporter when the tests actually run to ensure no conflicts with
+  // other test driver packages that may be added to the app but are not actually being
+  // used on this run.
+  mainMocha.reporter(reporter);
 
   mainMocha.run((failureCount) => {
     exitIfDone('server', failureCount);

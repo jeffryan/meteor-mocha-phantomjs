@@ -3,6 +3,12 @@ import { startPhantom } from 'meteor/dispatch:phantomjs-tests';
 
 const reporter = process.env.SERVER_TEST_REPORTER || 'spec';
 
+// pass the current env settings to the client.
+Meteor.startup(function() {
+  Meteor.settings.public = Meteor.settings.public || {};
+  Meteor.settings.public.env = process.env;
+});
+
 // Since intermingling client and server log lines would be confusing,
 // the idea here is to buffer all client logs until server tests have
 // finished running and then dump the buffer to the screen and continue

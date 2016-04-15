@@ -17,7 +17,8 @@ let serverTestsDone = false;
 let clientLines = [];
 function clientLogBuffer(line) {
   if (serverTestsDone) {
-    console.log(line);
+    // printing and removing the extra new-line character. The first was added by the client log, the second here.
+    console.log(line.replace(/\n$/, ''));
   } else {
     clientLines.push(line);
   }
@@ -41,7 +42,8 @@ function exitIfDone(type, failures) {
     serverTestsDone = true;
     printHeader('CLIENT');
     clientLines.forEach((line) => {
-      console.log(line);
+      // printing and removing the extra new-line character. The first was added by the client log, the second here.
+      console.log(line.replace(/\n$/, ''));
     });
   }
 

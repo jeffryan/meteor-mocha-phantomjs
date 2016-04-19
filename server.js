@@ -6,7 +6,7 @@ const reporter = process.env.SERVER_TEST_REPORTER || 'spec';
 // pass the current env settings to the client.
 Meteor.startup(function() {
   Meteor.settings.public = Meteor.settings.public || {};
-  Meteor.settings.public.env = process.env;
+  Meteor.settings.public.CLIENT_TEST_REPORTER = process.env.CLIENT_TEST_REPORTER;
 });
 
 // Since intermingling client and server log lines would be confusing,

@@ -7,7 +7,7 @@ function runTests() {
   // correct reporter is used in the case where `dispatch:mocha` is also
   // added to the app. Since both are testOnly packages, top-level client code in both
   // will run, potentially changing the reporter to the console reporter.
-  mocha.reporter(Meteor.settings.public.env.CLIENT_TEST_REPORTER || 'spec');
+  mocha.reporter(Meteor.settings.public.CLIENT_TEST_REPORTER || 'spec');
 
   // These `window` properties are all used by the phantomjs script to
   // know what is happening.

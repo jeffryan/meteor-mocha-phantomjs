@@ -32,6 +32,16 @@ The default Mocha reporter for server tests is the "spec" reporter. You can set 
 SERVER_TEST_REPORTER="dot" meteor test --once --driver-package dispatch:mocha-phantomjs
 ```
 
+### Run with a different client reporter
+
+The default Mocha reporter for client tests is the "spec" reporter. You can set the `CLIENT_TEST_REPORTER` environment variable to change it.
+
+```bash
+CLIENT_TEST_REPORTER="tap" meteor test --once --driver-package dispatch:mocha-phantomjs
+```
+
+Because of the differences between client and server code, not all reporters will work as client reporters. "spec" and "tap" are confirmed to work.
+
 ## NPM Scripts
 
 A good best practice is to define these commands as run scripts in your app's `package.json` file. For example:

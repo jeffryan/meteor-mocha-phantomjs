@@ -2,7 +2,7 @@ Package.describe({
   name: "dispatch:mocha-phantomjs",
   summary: "Run package or app tests with Mocha+PhantomJS and report all results in the server console",
   git: "https://github.com/DispatchMe/meteor-mocha-phantomjs.git",
-  version: '0.1.2',
+  version: '0.1.3',
   testOnly: true
 });
 

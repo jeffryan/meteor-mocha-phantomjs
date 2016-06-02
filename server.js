@@ -55,10 +55,13 @@ function exitIfDone(type, failures) {
     console.log('--------------------------------');
     if (!process.env.TEST_WATCH) {
       if (clientFailures + serverFailures > 0) {
-        process.exit(2); // exit with non-zero status if there were failures
+        process.exitCode=2; // exit with non-zero status if there were failures
       } else {
-        process.exit(0);
+        process.exitCode=0;
       }
+      //allow meteor process to handle the SIGINT status and shutdown
+      //gracefully instead of using process.exit();
+      process.kill(process.pid, 'SIGINT');
     }
   }
 }

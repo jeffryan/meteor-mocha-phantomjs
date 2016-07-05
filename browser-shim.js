@@ -69,38 +69,14 @@
         }
     })
 
-    if ('mozInnerScreenX' in window) {
-        // in slimerjs, we can stub out a setter to shim Mocha. phantomjs 2 fails
-        // to allow the property to be reconfigured...
-        Object.defineProperty(window, 'mocha', {
-            get: function() { return undefined },
-            set: function(m) {
-                shimMochaInstance(m)
-                delete window.mocha
-                window.mocha = m
-            },
-            configurable: true
-        })
-
-        Object.defineProperty(window, 'Mocha', {
-            get: function() { return undefined },
-            set: function(m) {
-                delete window.Mocha
-                window.Mocha = m
-                shimMochaProcess(m)
-            },
-            configurable: true
-        })
-    } else {
-        Object.defineProperty(window, 'initMochaPhantomJS', {
-            value: function () {
-                shimMochaProcess(Mocha)
-                shimMochaInstance(mocha)
-                delete window.initMochaPhantomJS
-            },
-            configurable: true
-        })
-    }
+    Object.defineProperty(window, 'initMochaPhantomJS', {
+        value: function () {
+            shimMochaProcess(Mocha)
+            shimMochaInstance(mocha)
+            delete window.initMochaPhantomJS
+        },
+        configurable: true
+    });
 
     // Mocha needs the formating feature of console.log so copy node's format function and
     // monkey-patch it into place. This code is copied from node's, links copyright applies.

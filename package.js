@@ -10,7 +10,7 @@ Package.onUse(function (api) {
   api.versionsFrom('1.3');
 
   api.use([
-    'practicalmeteor:mocha-core@1.0.0',
+    'ayhid:mocha-core@1.0.0',
     'ecmascript'
   ]);
 
